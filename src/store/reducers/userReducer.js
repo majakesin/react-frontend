@@ -12,9 +12,9 @@ function userReducer(state = initialState, action) {
     case types.LOGIN_USER:
       return { ...state };
     case types.LOGIN_SUCCESS:
-      return { ...state, loggedIn: true, user: action.user };
+      return { ...state, user: action.user };
     case types.LOGIN_ERROR:
-      return { ...state, loggedIn: false, message: action.message };
+      return { ...state, message: action.message };
     case types.REGISTER_USER:
       return { ...state, register: false };
     case types.REGISTER_SUCCESS:
