@@ -18,3 +18,30 @@ export const registerUser = (registerData) => {
     },
   };
 };
+
+export const loginSuccesss = (user) => {
+  return {
+    type: types.LOGIN_SUCCESS,
+    user: user,
+  };
+};
+
+export const loginError = (message) => {
+  return {
+    type: types.LOGIN_ERROR,
+    message,
+  };
+};
+
+export const registerSucces = () => {
+  return {
+    type: types.REGISTER_SUCCESS,
+  };
+};
+
+export const registerError = (message) => {
+  return {
+    type: types.REGISTER_ERROR,
+    message,
+  };
+};

@@ -1,23 +1,28 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import authService from "../../services/authService";
 import * as types from "../actionTypes/types";
-
+import {
+  loginSuccesss,
+  loginError,
+  registerError,
+  registerSucces,
+} from "../actions/userActions";
 function* LogIn({ payload }) {
   try {
     const user = yield call(authService.login, payload.loginData);
 
-    yield put({ type: types.LOGIN_SUCCESS, user: user });
+    yield put(loginSuccesss(user));
   } catch (exception) {
-    yield put({ type: types.LOGIN_ERROR, message: exception.message });
+    yield put(loginError(exception.message));
   }
 }
 
 function* Register({ payload }) {
   try {
     const response = yield call(authService.register, payload.registerData);
-    yield put({ type: types.REGISTER_SUCCESS });
+    yield put(registerSucces);
   } catch (exception) {
-    yield put({ type: types.REGISTER_ERROR, message: exception.message });
+    yield put(registerError(exception.message));
   }
 }
 

@@ -24,7 +24,7 @@ class HttpService {
         case 401:
           localStorage.removeItem("token");
           localStorage.removeItem("user");
-          <Redirect to="localhost:3000/register" />;
+          window.location.pathname = "/register";
           break;
         default:
           break;
@@ -38,6 +38,7 @@ class HttpService {
     this.unauthorizedCallback = callback;
   }
 }
+
 const options = {
   // hardkoduj na odgovarajucu vrednost
   baseURL: "http://127.0.0.1:8000/",
