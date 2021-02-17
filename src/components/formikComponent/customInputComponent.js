@@ -14,34 +14,18 @@ const getStyles = (errors, fieldName) => {
 };
 
 const CustomInputComponent = ({ field, errors, ...props }) => {
-  if (!field.name.includes("password")) {
-    return (
-      <div className="form-group">
-        <input
-          type="text"
-          {...field}
-          {...props}
-          style={getStyles(errors, field.name)}
-        />
-        <ErrorMessage name={field.name}>
-          {(msg) => <p style={{ color: "red" }}>{msg}</p>}
-        </ErrorMessage>
-      </div>
-    );
-  } else {
-    return (
-      <div className="form-group">
-        <input
-          type="password"
-          {...field}
-          {...props}
-          style={getStyles(errors, field.name)}
-        />
-        <ErrorMessage name={field.name}>
-          {(msg) => <p style={{ color: "red" }}>{msg}</p>}
-        </ErrorMessage>
-      </div>
-    );
-  }
+  return (
+    <div className="form-group">
+      <input
+        type={field.type}
+        {...field}
+        {...props}
+        style={getStyles(errors, field.name)}
+      />
+      <ErrorMessage name={field.name}>
+        {(msg) => <p style={{ color: "red" }}>{msg}</p>}
+      </ErrorMessage>
+    </div>
+  );
 };
 export default CustomInputComponent;

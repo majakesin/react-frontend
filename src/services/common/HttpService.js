@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { Redirect } from "react-router-dom";
 class HttpService {
   constructor(options = {}) {
     this.client = axios.create(options);
@@ -22,10 +22,9 @@ class HttpService {
       const { status } = error.response;
       switch (status) {
         case 401:
-          // Ishendlati ovo kako ti odgovara ( tebi je mozda i 403 kod? )
-          break;
-        case 403:
-          // skontati kako ispisati
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+          <Redirect to="localhost:3000/register" />;
           break;
         default:
           break;

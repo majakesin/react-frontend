@@ -2,19 +2,19 @@ import store from "../store";
 import * as types from "../actionTypes/types";
 
 export const loginUser = (loginData) => {
-  store.dispatch({
+  return {
     type: types.LOGIN_USER,
     payload: {
-      loginData: loginData,
+      loginData,
     },
-  });
+  };
 };
 
 export const registerUser = (registerData) => {
-  store.dispatch({
+  return {
     type: types.REGISTER_USER,
     payload: {
-      registerData: registerData,
+      registerData,
     },
-  });
+  };
 };

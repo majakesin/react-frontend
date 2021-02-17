@@ -29,8 +29,8 @@ class AuthService extends ApiService {
   };
   createSession = async (data) => {
     try {
-      localStorage.setItem("user", JSON.stringify(data.user));
-      localStorage.setItem("token", JSON.stringify(data.token)); // dodala da se ubaci odma i token u local storage?
+      localStorage.setItem("user", JSON.stringify(data.user)); //a ovde token
+      localStorage.setItem("token", JSON.stringify(data.token)); // ovde je username, da mi je lakse preuzeti
       await this.setAuthorizationHeader();
     } catch (e) {
       console.log(e);
@@ -43,11 +43,7 @@ class AuthService extends ApiService {
   };
   //dodato za registraciju
   register = async (registerData) => {
-    const token = this.getToken();
-    const user = this.getUser(); // ne moze kreirati novog ako je ulogovan
-    if (!(token && user)) {
-      await this.apiClient.post(ENDPOINTS.REGISTER_USER, registerData);
-    }
+    await this.apiClient.post(ENDPOINTS.REGISTER_USER, registerData);
   };
   getToken = async () => {
     const token = localStorage.getItem("token");

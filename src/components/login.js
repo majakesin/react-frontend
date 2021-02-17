@@ -3,9 +3,11 @@ import { Formik, Form, Field } from "formik";
 import LoginShema from "./formikComponent/loginShema";
 import CustomInputComponent from "./formikComponent/customInputComponent";
 import { BrowserRouter, Link, StaticRouter } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { loginUser } from "../store/actions/userActions";
 const Login = () => {
-  const userSelector = (state) => state;
+  const dispatch = useDispatch();
+  const handleLogin = (data) => dispatch(loginUser(data));
 
   return (
     <div>
@@ -15,20 +17,20 @@ const Login = () => {
           password: "",
         }}
         validationSchema={LoginShema}
-        onSubmit={(values) => {
-          loginUser(values);
-        }}
+        onSubmit={handleLogin}
       >
-        {({}) => (
+        {() => (
           <Form>
             <Field
               name="email"
+              type="text"
               component={CustomInputComponent}
               placeholder="email"
               className="form-control"
             ></Field>
             <Field
               name="password"
+              type="password"
               component={CustomInputComponent}
               placeholder="password"
               className="form-control"

@@ -2,7 +2,6 @@ import { actionChannel } from "redux-saga/effects";
 import * as types from "../actionTypes/types";
 
 const initialState = {
-  loggedIn: false,
   user: null,
   register: false,
   message: null,
@@ -11,7 +10,7 @@ const initialState = {
 function userReducer(state = initialState, action) {
   switch (action.type) {
     case types.LOGIN_USER:
-      return { ...state, loggedIn: false }; // ovo mi je upitno?
+      return { ...state };
     case types.LOGIN_SUCCESS:
       return { ...state, loggedIn: true, user: action.user };
     case types.LOGIN_ERROR:

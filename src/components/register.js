@@ -3,10 +3,12 @@ import { Formik, Form, Field } from "formik";
 import RegisterShema from "./formikComponent/registerShema";
 import CustomInputComponent from "./formikComponent/customInputComponent";
 import { BrowserRouter, Link } from "react-router-dom";
-import axios from "axios";
+import { useDispatch } from "react-redux";
 import { registerUser } from "../store/actions/userActions";
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const handleRegister = (data) => dispatch(registerUser(data));
   return (
     <div className="container">
       <div style={{ margin: "120px" }}>
@@ -20,38 +22,41 @@ const Register = () => {
             password_confirmation: "",
           }}
           validationSchema={RegisterShema}
-          onSubmit={(values) => {
-            registerUser(values);
-          }}
+          onSubmit={handleRegister}
         >
-          {({}) => (
+          {() => (
             <Form>
               <Field
                 name="username"
+                type="text"
                 component={CustomInputComponent}
                 placeholder="email"
                 className="form-control"
               ></Field>
               <Field
                 name="first_name"
+                type="text"
                 component={CustomInputComponent}
                 placeholder="first name"
                 className="form-control"
               ></Field>
               <Field
                 name="last_name"
+                type="text"
                 component={CustomInputComponent}
                 placeholder="Last name"
                 className="form-control"
               ></Field>
               <Field
                 name="password"
+                type="password"
                 component={CustomInputComponent}
                 placeholder="password"
                 className="form-control"
               ></Field>
               <Field
                 name="password_confirmation"
+                type="password"
                 component={CustomInputComponent}
                 placeholder="password confirmation"
                 className="form-control"
