@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import "./components/footer";
 import Footer from "./components/footer";
@@ -7,6 +6,9 @@ import Register from "./components/register";
 import Login from "./components/login";
 import { BrowserRouter, Route } from "react-router-dom";
 import Home from "./components/Home";
+import LogedHome from "./components/logedHome";
+import OneMoviePage from "./components/oneMovie";
+
 function App() {
   return (
     <>
@@ -21,6 +23,8 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/register" exact component={Register} />
           <Route path="/login" exact component={Login} />
+          <Route path="/loged/home" exact component={LogedHome} />
+          <Route path="/one/movie" exact component={OneMoviePage} />
         </BrowserRouter>
       </div>
       <br></br>
