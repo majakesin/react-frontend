@@ -1,11 +1,12 @@
 import React from "react";
 import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
 import { Link, BrowserRouter } from "react-router-dom";
+import "font-awesome/css/font-awesome.min.css";
 const Navigation = () => {
   return (
     <BrowserRouter>
       <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="#home"></Navbar.Brand>
+        <Navbar.Brand></Navbar.Brand>
         <Nav className="mr-auto" style={{ margin: "5px" }}>
           <Link to="/" style={{ color: "#F8F8FF" }}>
             Movies

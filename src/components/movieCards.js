@@ -1,18 +1,35 @@
 import React from "react";
+import "./css/movieCard.css";
+import "font-awesome/css/font-awesome.min.css";
 
-const MovieCard = () => {
+const MovieCard = ({ movie }) => {
   return (
-    <div class="col-sm-4">
-      <div class="panel panel-primary">
-        <div class="panel-heading">BLACK FRIDAY DEAL</div>
-        <div class="panel-body">
+    <div className="card col-sm-3" style={{ margin: "3%" }}>
+      <div className="panel panel-primary">
+        <div className="panel-heading" style={{ margin: "3%" }}>
+          <h3>{movie.title}</h3>
+        </div>
+        <div className="panel-body">
+          <p style={{ margin: "3%" }}>{movie.description}</p>
           <img
-            src="https://placehold.it/150x80?text=IMAGE"
-            class="img-responsive"
-            style="width:100%"
-            alt="Image"
+            src={movie.cover_image}
+            className="img-responsive"
+            style={{ width: "95%", margin: "3%", height: "240px" }}
+            alt="movie"
           ></img>
-          <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+
+          <div className="panel-footer like" style={{ marginBottom: "3%" }}>
+            <div
+              className="row"
+              style={{ marginLeft: "30%", marginBottom: "5%" }}
+            >
+              <i class="fa fa fa-thumbs-up"></i>
+              <i style={{ marginLeft: "3%" }} class="fa fa fa-thumbs-down"></i>
+            </div>
+            <a href={`/one/movie?id=${movie.id}`} style={{ marginLeft: "20%" }}>
+              About
+            </a>
+          </div>
         </div>
       </div>
     </div>

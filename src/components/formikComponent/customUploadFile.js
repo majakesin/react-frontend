@@ -14,19 +14,26 @@ const getStyles = (errors, fieldName) => {
   };
 };
 
-const CustomInputComponent = ({ field, errors, ...props }) => {
+const CustomUploadFileComponent = ({ field, errors, ...props }) => {
   return (
     <div className="form-group">
-      <input
-        type={field.type}
-        {...field}
-        {...props}
-        style={getStyles(errors, field.name)}
-      />
+      {field.value ? (
+        <div>{field.value.name}</div>
+      ) : (
+        <input
+          type="file"
+          {...field}
+          {...props}
+          style={getStyles(errors, field.name)}
+          onChange={(event) => {
+            props.form.setFieldValue(field.name, event.target.files[0]);
+          }}
+        />
+      )}
       <ErrorMessage name={field.name}>
         {(msg) => <p style={{ color: "red" }}>{msg}</p>}
       </ErrorMessage>
     </div>
   );
 };
-export default CustomInputComponent;
+export default CustomUploadFileComponent;
