@@ -1,15 +1,18 @@
 import * as types from "../actionTypes/types";
 
-export const getMovies = () => {
+export const getMovies = (nextOrPrevious) => {
   return {
     type: types.MOVIES_GET,
+    nextOrPrevious,
   };
 };
 
-export const getMoviesSuccess = (movies) => {
+export const getMoviesSuccess = (movies, next, previous) => {
   return {
     type: types.MOVIES_GET_SUCCESS,
     movies,
+    next,
+    previous,
   };
 };
 
@@ -20,10 +23,11 @@ export const getMoviesError = (message) => {
   };
 };
 
-export const createMovie = (movieData) => {
+export const createMovie = (values, selectedGenres) => {
   return {
     type: types.MOVIE_CREATE,
-    movieData,
+    values,
+    selectedGenres,
   };
 };
 

@@ -5,23 +5,34 @@ const ENDPOINTS = {
   GET_GENRES: "api/movies/genres/",
 };
 class MovieService extends ApiService {
-  movies = async () => {
-    const { data } = await this.apiClient.get(ENDPOINTS.GET_MOVIES);
-    return data;
+  movies = ({ nextOrPrevious }) => {
+    if (nextOrPrevious === undefined) {
+      return this.apiClient.get(ENDPOINTS.GET_MOVIES);
+    } else {
+      return this.apiClient.get(nextOrPrevious);
+    }
   };
 
-  genres = async () => {
-    const { data } = await this.apiClient.get(ENDPOINTS.GET_GENRES);
-    return data;
+  genres = () => {
+    return this.apiClient.get(ENDPOINTS.GET_GENRES);
   };
-  createMovie = async (movieData) => {
-    await this.apiClient.post(ENDPOINTS.GET_MOVIES, movieData);
+  createMovie = (values, selectedGenres) => {
+    const movie = new FormData();
+    movie.append("title", values.title);
+    movie.append("description", values.description);
+    movie.append("cover_image", values.cover_image);
+
+    let choosenGenres = selectedGenres.map((item) => {
+      let genre = item.value;
+      return genre;
+    });
+    movie.append("genres", choosenGenres);
+    return this.apiClient.post(ENDPOINTS.GET_MOVIES, movie);
   };
 
-  oneMovie = async (id) => {
+  oneMovie = (id) => {
     const url = ENDPOINTS.GET_MOVIES + id + "/";
-    const { data } = await this.apiClient.get(url);
-    return data;
+    return this.apiClient.get(url);
   };
 }
 const movieService = new MovieService();

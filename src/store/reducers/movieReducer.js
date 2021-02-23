@@ -6,13 +6,20 @@ let initialState = {
   message: null,
   genres: [],
   movie_create: false,
+  next: null,
+  previous: null,
 };
 function movieReducer(state = initialState, action) {
   switch (action.type) {
     case types.MOVIES_GET:
       return { ...state };
     case types.MOVIES_GET_SUCCESS:
-      return { ...state, movies: action.movies };
+      return {
+        ...state,
+        movies: action.movies,
+        next: action.next,
+        previous: action.previous,
+      };
     case types.MOVIES_GET_ERROR:
       return { ...state, message: action.message };
     case types.GET_ONE_MOVIE:

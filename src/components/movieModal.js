@@ -4,6 +4,7 @@ import MovieShema from "./formikComponent/movieShema";
 import Select from "react-select";
 import { Formik, Form, Field } from "formik";
 import CustomInputComponent from "./formikComponent/customInputComponent";
+import CustomUploadFileComponent from "./formikComponent/customUploadFile";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { createMovie, getGenres } from "../store/actions/movieActions";
@@ -34,10 +35,6 @@ const MovieModal = () => {
   });
   //deo za preuzimanje selektovanih zanrova
   const [selectedGenres, setSelectedGenres] = useState([]);
-  const [imageFile, setImageFile] = useState();
-  const handleFileChange = (event) => {
-    setImageFile(event.target.files[0]);
-  };
   const handleSelectChange = (selectedGenres) => {
     setSelectedGenres(selectedGenres);
     console.log(selectedGenres);
@@ -78,22 +75,12 @@ const MovieModal = () => {
             initialValues={{
               title: "",
               description: "",
+              cover_image: undefined,
             }}
             validationSchema={MovieShema}
             onSubmit={(values) => {
-              // pravim podatak koji zelim poslati na back :)
-              let movie = new FormData();
-              movie.append("title", values.title);
-              movie.append("description", values.description);
-              movie.append("cover_image", imageFile);
-
-              let choosenGenres = selectedGenres.map((item) => {
-                let genre = item.value;
-                return genre;
-              });
-              movie.append("genres", choosenGenres);
-
-              dispatch(createMovie(movie));
+              console.log(values);
+              dispatch(createMovie(values, selectedGenres));
               closeModal();
             }}
           >
@@ -115,11 +102,11 @@ const MovieModal = () => {
                 ></Field>
                 <label>Movie cover picture</label>
                 <br></br>
-                <input
-                  type="file"
-                  placeholder="image"
-                  onChange={handleFileChange}
-                ></input>
+                <Field
+                  name="cover_image"
+                  component={CustomUploadFileComponent}
+                  placeholder="cover image"
+                ></Field>
                 <Select
                   isMulti
                   options={options}

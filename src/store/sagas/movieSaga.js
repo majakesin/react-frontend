@@ -11,27 +11,32 @@ import {
 } from "../actions/movieActions";
 import movieService from "../../services/movieService";
 
-function* Movies() {
+function* Movies(nextOrPrevious) {
   try {
-    const movies = yield call(movieService.movies);
-    yield put(getMoviesSuccess(movies));
+    const { data } = yield call(movieService.movies, nextOrPrevious);
+    yield put(getMoviesSuccess(data.results, data.next, data.previous));
   } catch (exception) {
     yield put(getMoviesError(exception.message));
   }
 }
 
-function* CreateMovie({ movieData }) {
+function* CreateMovie({ values, selectedGenres }) {
   try {
-    const response = yield call(movieService.createMovie, movieData);
+    const response = yield call(
+      movieService.createMovie,
+      values,
+      selectedGenres
+    );
   } catch (exception) {
-    yield put(createMovieError(exception.movie));
+    yield put(createMovieError(exception.message));
+    console.log(exception);
   }
 }
 
 function* GetOne({ id }) {
   try {
-    const movie = yield call(movieService.oneMovie, id);
-    yield put(getOneMovieSuccess(movie));
+    const { data } = yield call(movieService.oneMovie, id);
+    yield put(getOneMovieSuccess(data));
   } catch (exception) {
     yield put(getOneMovieError(exception.message));
   }
@@ -39,8 +44,8 @@ function* GetOne({ id }) {
 
 function* GetGenres() {
   try {
-    const genres = yield call(movieService.genres);
-    yield put(getGenresSuccess(genres));
+    const { data } = yield call(movieService.genres);
+    yield put(getGenresSuccess(data));
   } catch (exception) {
     yield put(getGenresError(exception.message));
   }

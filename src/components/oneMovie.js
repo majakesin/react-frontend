@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOneMovie } from "../store/actions/movieActions";
 
 const OneMoviePage = () => {
-  let search = window.location.search;
-  let params = new URLSearchParams(search);
-  let id = params.get("id");
   const dispatch = useDispatch();
   const movie = useSelector((state) => state.movies.movie);
 
   useEffect(() => {
+    const search = window.location.search;
+    const params = new URLSearchParams(search);
+    const id = params.get("id");
     dispatch(getOneMovie(id));
   }, []);
   if (!movie) {

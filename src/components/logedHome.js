@@ -1,22 +1,26 @@
+import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createMovie, getMovies } from "../store/actions/movieActions";
-import MovieCard from "./movieCards";
+import { getMovies } from "../store/actions/movieActions";
+import Pagination from "./pagination";
+import Movies from "./movies";
 import MovieModal from "./movieModal";
 const LogedHome = () => {
   const dispatch = useDispatch();
   const movies = useSelector((state) => state.movies.movies);
+  const next = useSelector((state) => state.movies.next);
+  const previous = useSelector((state) => state.movies.previous);
   useEffect(() => {
     dispatch(getMovies());
   }, []);
+
   return (
-    <div>
+    <div className="container">
       <MovieModal></MovieModal>
       <div className="row">
-        {movies.map((item) => (
-          <MovieCard movie={item} key={item.id}></MovieCard>
-        ))}
+        <Movies movies={movies}></Movies>
       </div>
+      <Pagination next={next} previous={previous}></Pagination>
     </div>
   );
 };
