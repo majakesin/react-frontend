@@ -1,6 +1,5 @@
 import React from "react";
 import { ErrorMessage, getIn } from "formik";
-import { useState } from "react";
 
 const getStyles = (errors, fieldName) => {
   if (getIn(errors, fieldName)) {

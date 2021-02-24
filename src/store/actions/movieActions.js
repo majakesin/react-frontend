@@ -1,9 +1,11 @@
 import * as types from "../actionTypes/types";
 
-export const getMovies = (nextOrPrevious) => {
+export const getMovies = (nextOrPrevious, title, genre) => {
   return {
     type: types.MOVIES_GET,
     nextOrPrevious,
+    title,
+    genre,
   };
 };
 

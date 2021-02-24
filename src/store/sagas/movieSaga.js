@@ -11,9 +11,14 @@ import {
 } from "../actions/movieActions";
 import movieService from "../../services/movieService";
 
-function* Movies(nextOrPrevious) {
+function* Movies({ nextOrPrevious, title, genre }) {
   try {
-    const { data } = yield call(movieService.movies, nextOrPrevious);
+    const { data } = yield call(
+      movieService.movies,
+      nextOrPrevious,
+      title,
+      genre
+    );
     yield put(getMoviesSuccess(data.results, data.next, data.previous));
   } catch (exception) {
     yield put(getMoviesError(exception.message));
