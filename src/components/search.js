@@ -7,13 +7,10 @@ import Select from "react-select";
 const Search = () => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState(undefined);
-  const [selectedGenres, setSelectedGenres] = useState(undefined);
-  const genres = useSelector((state) => state.movies.genres);
-
-  const options = genres.map((item) => {
-    let temp = { value: item.id, label: item.type };
-    return temp;
-  });
+  const [selectedGenres, setSelectedGenres] = useState([]);
+  const options = useSelector((state) =>
+    state.movies.genres.map(({ id, type }) => ({ value: id, label: type }))
+  );
 
   const handleChange = (selectedGenres) => {
     setSelectedGenres(selectedGenres);

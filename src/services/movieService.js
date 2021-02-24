@@ -7,23 +7,9 @@ const ENDPOINTS = {
 class MovieService extends ApiService {
   movies = (nextOrPrevious, title, genres) => {
     if (nextOrPrevious === undefined) {
-      if (title !== undefined && genres === undefined) {
-        const urlT = ENDPOINTS.GET_MOVIES + "?movie_search=" + title;
-        return this.apiClient.get(urlT);
-      } else if (title !== undefined && genres !== undefined) {
-        const urlTG =
-          ENDPOINTS.GET_MOVIES +
-          "?movie_search=" +
-          title +
-          "&genre=" +
-          genres.value;
-        return this.apiClient.get(urlTG);
-      } else if (genres !== undefined && title === undefined) {
-        const urlG = ENDPOINTS.GET_MOVIES + "?genre=" + genres.value;
-        return this.apiClient.get(urlG);
-      } else if (title === undefined && genres === undefined) {
-        return this.apiClient.get(ENDPOINTS.GET_MOVIES);
-      }
+      return this.apiClient.get(ENDPOINTS.GET_MOVIES, {
+        params: { movie_search: title, genre: genres },
+      });
     } else {
       return this.apiClient.get(nextOrPrevious);
     }
