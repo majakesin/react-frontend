@@ -53,6 +53,10 @@ class MovieService extends ApiService {
     const url = ENDPOINTS.GET_MOVIES + id + "/";
     return this.apiClient.get(url);
   };
+
+  incrementViewForMovie = (id) => {
+    //return this.apiClient.put(ENDPOINTS.GET_MOVIES + movie.id + "/", movie);
+  };
 }
 const movieService = new MovieService();
 export default movieService;
