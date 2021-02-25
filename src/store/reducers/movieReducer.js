@@ -8,6 +8,9 @@ let initialState = {
   movie_create: false,
   next: null,
   previous: null,
+  likeDislike: null,
+  likes: null,
+  dislikes: null,
 };
 function movieReducer(state = initialState, action) {
   switch (action.type) {
@@ -39,6 +42,18 @@ function movieReducer(state = initialState, action) {
     case types.MOVIE_CREATE_SUCCESS:
       return { ...state, movie_create: true };
     case types.MOVIE_CREATE_ERROR:
+      return { ...state, message: action.message };
+    case types.LIKE_DISLIKE_MOVIE:
+      return state;
+    case types.LIKE_DISLIKE_SUCCESS:
+      return { ...state, likeDislike: true };
+    case types.LIKE_DISLIKE_ERROR:
+      return { ...state, message: action.message };
+    case types.GET_LIKES_DISLIKES:
+      return state;
+    case types.GET_LIKES_DISLIKES_SUCCESS:
+      return { ...state, likes: action.likes, dislikes: action.dislikes };
+    case types.GET_LIKES_DISLIKES_ERROR:
       return { ...state, message: action.message };
     default:
       return state;

@@ -86,3 +86,47 @@ export const getGenresError = (message) => {
     message,
   };
 };
+
+//movie like dislike
+
+export const movieLikeDislike = (movie, flag) => {
+  return {
+    type: types.LIKE_DISLIKE_MOVIE,
+    movie,
+    flag,
+  };
+};
+
+export const MovieLikeDislikeSuccess = () => {
+  return {
+    type: types.LIKE_DISLIKE_SUCCESS,
+  };
+};
+
+export const MovieLikeDislikeError = (message) => {
+  return {
+    type: types.LIKE_DISLIKE_ERROR,
+  };
+};
+
+// za preuzimanje lajkova dislajkova
+export const getLikesDislikes = (movie_id) => {
+  return {
+    type: types.GET_LIKES_DISLIKES,
+    movie_id,
+  };
+};
+export const getLikesDislikesSuccess = (likes, dislikes) => {
+  return {
+    type: types.GET_LIKES_DISLIKES_SUCCESS,
+    likes,
+    dislikes,
+  };
+};
+
+export const getLikesDislikesError = (message) => {
+  return {
+    type: types.GET_LIKES_DISLIKES_ERROR,
+    message,
+  };
+};

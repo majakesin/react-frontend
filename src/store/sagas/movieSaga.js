@@ -4,10 +4,14 @@ import {
   createMovieError,
   getGenresError,
   getGenresSuccess,
+  getLikesDislikesError,
+  getLikesDislikesSuccess,
   getMoviesError,
   getMoviesSuccess,
   getOneMovieError,
   getOneMovieSuccess,
+  MovieLikeDislikeError,
+  MovieLikeDislikeSuccess,
 } from "../actions/movieActions";
 import movieService from "../../services/movieService";
 
@@ -24,7 +28,14 @@ function* Movies({ nextOrPrevious, title, genre }) {
     yield put(getMoviesError(exception.message));
   }
 }
-
+function* LikeDislike({ movie, flag }) {
+  try {
+    yield call(movieService.likeDislike, movie, flag);
+    yield put(MovieLikeDislikeSuccess());
+  } catch (exception) {
+    yield put(MovieLikeDislikeError(exception.message));
+  }
+}
 function* CreateMovie({ values, selectedGenres }) {
   try {
     const response = yield call(
@@ -47,6 +58,15 @@ function* GetOne({ id }) {
   }
 }
 
+function* getLikesDislikeForMovie({ movie_id }) {
+  try {
+    const { data } = yield call(movieService.getLikesDislikes, movie_id);
+    yield put(getLikesDislikesSuccess(data.likes, data.dislikes));
+  } catch (exception) {
+    yield put(getLikesDislikesError(exception.message));
+  }
+}
+
 function* GetGenres() {
   try {
     const { data } = yield call(movieService.genres);
@@ -61,5 +81,7 @@ function* MovieSaga() {
   yield takeEvery(types.GET_ONE_MOVIE, GetOne);
   yield takeEvery(types.GET_GENRES, GetGenres);
   yield takeEvery(types.MOVIE_CREATE, CreateMovie);
+  yield takeEvery(types.LIKE_DISLIKE_MOVIE, LikeDislike);
+  yield takeEvery(types.GET_LIKES_DISLIKES, getLikesDislikeForMovie);
 }
 export default MovieSaga;
