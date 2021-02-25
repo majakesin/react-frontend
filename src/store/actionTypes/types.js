@@ -27,3 +27,14 @@ export const GET_ONE_MOVIE_ERROR = "get_one_movie_error";
 export const GET_GENRES = "get_genres";
 export const GET_GENRES_SUCCESS = "get_genres_success";
 export const GET_GENRES_ERROR = "get_genres_error";
+
+//za like/dislike
+
+export const LIKE_DISLIKE_MOVIE = "like_dislike_movie";
+export const LIKE_DISLIKE_SUCCESS = "like_dislike_success";
+export const LIKE_DISLIKE_ERROR = "like_dislike_error";
+
+//za preuzimanje like/dislike
+export const GET_LIKES_DISLIKES = "get_likes_dislikes";
+export const GET_LIKES_DISLIKES_SUCCESS = "get_likes_dislikes_success";
+export const GET_LIKES_DISLIKES_ERROR = "get_likes_dislikes_error";

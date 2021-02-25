@@ -19,11 +19,12 @@ class AuthService extends ApiService {
     }
   };
 
-  setAuthorizationHeader = async () => {
-    const token = await this.getToken();
+  setAuthorizationHeader = () => {
+    const token = this.getToken();
     if (token) {
+      console.log(token);
       this.api.attachHeaders({
-        Authorization: `Token ${token}`,
+        Authorization: `Bearer ${token}`,
       });
     }
   };
@@ -45,12 +46,12 @@ class AuthService extends ApiService {
   register = async (registerData) => {
     await this.apiClient.post(ENDPOINTS.REGISTER_USER, registerData);
   };
-  getToken = async () => {
+  getToken = () => {
     const token = localStorage.getItem("token");
     return token ? JSON.parse(token) : undefined;
   };
   // dodala getUser
-  getUser = async () => {
+  getUser = () => {
     const user = localStorage.getItem("user");
     return user ? JSON.parse(user) : undefined;
   };

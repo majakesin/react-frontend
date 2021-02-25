@@ -1,8 +1,16 @@
 import React from "react";
 import "./css/movieCard.css";
 import "font-awesome/css/font-awesome.min.css";
+import { useDispatch } from "react-redux";
+import { movieLikeDislike } from "../store/actions/movieActions";
 
 const MovieCard = ({ movie }) => {
+  const dispatch = useDispatch();
+
+  const likeDislike = (movie, flag) => {
+    dispatch(movieLikeDislike(movie, flag));
+  };
+
   return (
     <div className="card col-sm-3" style={{ margin: "3%" }}>
       <div className="panel panel-primary">
@@ -23,7 +31,12 @@ const MovieCard = ({ movie }) => {
               className="row"
               style={{ marginLeft: "30%", marginBottom: "5%" }}
             >
-              <i class="fa fa fa-thumbs-up"></i>
+              <i
+                class="fa fa fa-thumbs-up"
+                onClick={() => {
+                  likeDislike(movie, true);
+                }}
+              ></i>
               <i style={{ marginLeft: "3%" }} class="fa fa fa-thumbs-down"></i>
             </div>
             <a href={`/one/movie?id=${movie.id}`} style={{ marginLeft: "20%" }}>

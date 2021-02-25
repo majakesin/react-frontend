@@ -1,16 +1,19 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getOneMovie } from "../store/actions/movieActions";
+import { getLikesDislikes, getOneMovie } from "../store/actions/movieActions";
 
 const OneMoviePage = () => {
   const dispatch = useDispatch();
   const movie = useSelector((state) => state.movies.movie);
+  const likes = useSelector((state) => state.movies.likes);
+  const dislikes = useSelector((state) => state.movies.dislikes);
 
   useEffect(() => {
     const search = window.location.search;
     const params = new URLSearchParams(search);
     const id = params.get("id");
     dispatch(getOneMovie(id));
+    dispatch(getLikesDislikes(id));
   }, []);
   if (!movie) {
     return <div></div>;
@@ -35,8 +38,9 @@ const OneMoviePage = () => {
               className="row"
               style={{ marginLeft: "30%", marginBottom: "5%" }}
             >
-              <p>Number of likes:</p>
-              <p>Number of dislikes:</p>
+              <p>Number of likes: {likes}</p>
+              <br></br>
+              <p>Number of dislikes: {dislikes}</p>
               <p></p>
             </div>
           </div>
