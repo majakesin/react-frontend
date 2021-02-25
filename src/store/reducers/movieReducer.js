@@ -49,12 +49,7 @@ function movieReducer(state = initialState, action) {
       return { ...state, likeDislike: true };
     case types.LIKE_DISLIKE_ERROR:
       return { ...state, message: action.message };
-    case types.GET_LIKES_DISLIKES:
-      return state;
-    case types.GET_LIKES_DISLIKES_SUCCESS:
-      return { ...state, likes: action.likes, dislikes: action.dislikes };
-    case types.GET_LIKES_DISLIKES_ERROR:
-      return { ...state, message: action.message };
+
     default:
       return state;
   }

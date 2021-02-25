@@ -1,12 +1,22 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getLikesDislikes, getOneMovie } from "../store/actions/movieActions";
+import {
+  getLikesDislikes,
+  getOneMovie,
+  incrementMovieView,
+} from "../store/actions/movieActions";
 
 const OneMoviePage = () => {
   const dispatch = useDispatch();
   const movie = useSelector((state) => state.movies.movie);
   const likes = useSelector((state) => state.movies.likes);
   const dislikes = useSelector((state) => state.movies.dislikes);
+  let movie_update = undefined;
+
+  if (movie) {
+    movie_update = movie;
+    movie_update.number_of_views++;
+  }
 
   useEffect(() => {
     const search = window.location.search;
@@ -40,8 +50,11 @@ const OneMoviePage = () => {
             >
               <p>Number of likes: {likes}</p>
               <br></br>
-              <p>Number of dislikes: {dislikes}</p>
-              <p></p>
+              <p style={{ marginLeft: "5%" }}>Number of dislikes: {dislikes}</p>
+              <p style={{ marginLeft: "5%" }}>
+                {" "}
+                Number of view: {movie.number_of_views}
+              </p>
             </div>
           </div>
         </div>

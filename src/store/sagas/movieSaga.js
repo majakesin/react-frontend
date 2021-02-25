@@ -10,6 +10,8 @@ import {
   getMoviesSuccess,
   getOneMovieError,
   getOneMovieSuccess,
+  incremenetMovieViewError,
+  incrementMovieViewSuccess,
   MovieLikeDislikeError,
   MovieLikeDislikeSuccess,
 } from "../actions/movieActions";
