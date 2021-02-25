@@ -1,7 +1,11 @@
 import * as types from "../actionTypes/types";
 import { call, put, take, takeEvery } from "redux-saga/effects";
 import {
+  createCommentError,
+  createCommentSucces,
   createMovieError,
+  getCommentsError,
+  getCommentsSuccess,
   getGenresError,
   getGenresSuccess,
   getLikesDislikesError,
@@ -78,6 +82,28 @@ function* GetGenres() {
   }
 }
 
+function* createComment({ comment, movie_id }) {
+  try {
+    yield call(movieService.createComment, comment, movie_id);
+    yield put(createCommentSucces());
+  } catch (exception) {
+    yield put(createCommentError(exception.message));
+  }
+}
+
+function* getComments({ nextOrPrevious, movie_id }) {
+  try {
+    const { data } = yield call(
+      movieService.getComments,
+      nextOrPrevious,
+      movie_id
+    );
+    yield put(getCommentsSuccess(data.results, data.next, data.previous));
+  } catch (exception) {
+    yield put(getCommentsError(exception.message));
+  }
+}
+
 function* MovieSaga() {
   yield takeEvery(types.MOVIES_GET, Movies);
   yield takeEvery(types.GET_ONE_MOVIE, GetOne);
@@ -85,5 +111,7 @@ function* MovieSaga() {
   yield takeEvery(types.MOVIE_CREATE, CreateMovie);
   yield takeEvery(types.LIKE_DISLIKE_MOVIE, LikeDislike);
   yield takeEvery(types.GET_LIKES_DISLIKES, getLikesDislikeForMovie);
+  yield takeEvery(types.CREATE_COMMENT, createComment);
+  yield takeEvery(types.GET_COMMENTS, getComments);
 }
 export default MovieSaga;

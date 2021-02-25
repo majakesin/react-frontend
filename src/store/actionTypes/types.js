@@ -38,3 +38,13 @@ export const LIKE_DISLIKE_ERROR = "like_dislike_error";
 export const GET_LIKES_DISLIKES = "get_likes_dislikes";
 export const GET_LIKES_DISLIKES_SUCCESS = "get_likes_dislikes_success";
 export const GET_LIKES_DISLIKES_ERROR = "get_likes_dislikes_error";
+
+//za kreiranje komentara
+export const CREATE_COMMENT = "create_comment";
+export const CREATE_COMMENT_SUCCESS = "create_comment_success";
+export const CREATE_COMMENT_ERROR = "create_comment_error";
+
+//za preuzimanje komentara
+export const GET_COMMENTS = "get_comments";
+export const GET_COMMENTS_SUCCESS = "get_comments_success";
+export const GET_COMMENTS_ERROR = "get_comments_error";

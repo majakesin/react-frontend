@@ -130,3 +130,50 @@ export const getLikesDislikesError = (message) => {
     message,
   };
 };
+
+//za komentare
+export const createComment = (comment, movie_id) => {
+  return {
+    type: types.CREATE_COMMENT,
+    comment,
+    movie_id,
+  };
+};
+
+export const createCommentSucces = () => {
+  return {
+    type: types.CREATE_COMMENT_SUCCESS,
+  };
+};
+
+export const createCommentError = (message) => {
+  return {
+    type: types.CREATE_COMMENT_ERROR,
+    message,
+  };
+};
+
+// akcije za preuzimanje
+export const getComments = (nextOrPrevious, movie_id) => {
+  return {
+    type: types.GET_COMMENTS,
+    nextOrPrevious,
+    movie_id,
+  };
+};
+
+export const getCommentsSuccess = (comments, next, previous) => {
+  return {
+    type: types.GET_COMMENTS_SUCCESS,
+    comments,
+    next,
+    previous,
+  };
+};
+
+export const getCommentsError = (message) => {
+  return {
+    type: types.GET_COMMENTS_ERROR,
+    message,
+  };
+};
