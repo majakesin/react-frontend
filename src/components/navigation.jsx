@@ -13,6 +13,11 @@ const Navigation = () => {
             Movies
           </Link>
         </Nav>
+        <Nav className="mr-auto" style={{ margin: "5px" }}>
+          <Link to="/watched/movies" style={{ color: "#F8F8FF" }}>
+            watched_movies
+          </Link>
+        </Nav>
         <Form inline>
           <Nav className="mr-auto" style={{ margin: "5px" }}>
             <Link to="/register" style={{ color: "#F8F8FF" }}>

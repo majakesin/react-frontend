@@ -5,6 +5,8 @@ const ENDPOINTS = {
   GET_GENRES: "api/movies/genres/",
   LIKE_DISLIKE: "api/movies/like/",
   GET_LIKES_DISLIKES: "api/movies/like/",
+  CREATE_COMMENT: "api/movies/comments/",
+  WATCHED_MOVIE: "api/movies/watched/",
 };
 class MovieService extends ApiService {
   movies = (nextOrPrevious, title, genres) => {
@@ -54,8 +56,27 @@ class MovieService extends ApiService {
     return this.apiClient.get(url);
   };
 
-  incrementViewForMovie = (id) => {
-    //return this.apiClient.put(ENDPOINTS.GET_MOVIES + movie.id + "/", movie);
+  getComments = (nextOrPrevious, movie_id) => {
+    if (nextOrPrevious === undefined) {
+      return this.apiClient.get(ENDPOINTS.CREATE_COMMENT, {
+        params: { movie: movie_id },
+      });
+    } else {
+      return this.apiClient.get(nextOrPrevious);
+    }
+  };
+
+  createComment = (comment, movie_id) => {
+    comment = {
+      title: comment.title,
+      description: comment.description,
+      movie: movie_id,
+    };
+    return this.apiClient.post(ENDPOINTS.CREATE_COMMENT, comment);
+  };
+  watchedMovies = (movie_id) => {
+    const movie = { movie_id: movie_id };
+    return this.apiClient.post(ENDPOINTS.WATCHED_MOVIE, movie);
   };
 }
 const movieService = new MovieService();

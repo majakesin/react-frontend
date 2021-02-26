@@ -11,6 +11,8 @@ let initialState = {
   likeDislike: null,
   likes: null,
   dislikes: null,
+  comment_create: false,
+  comments: [],
 };
 function movieReducer(state = initialState, action) {
   switch (action.type) {
@@ -19,9 +21,7 @@ function movieReducer(state = initialState, action) {
     case types.MOVIES_GET_SUCCESS:
       return {
         ...state,
-        movies: action.movies,
-        next: action.next,
-        previous: action.previous,
+        ...action,
       };
     case types.MOVIES_GET_ERROR:
       return { ...state, message: action.message };
@@ -49,7 +49,38 @@ function movieReducer(state = initialState, action) {
       return { ...state, likeDislike: true };
     case types.LIKE_DISLIKE_ERROR:
       return { ...state, message: action.message };
-
+    case types.GET_LIKES_DISLIKES:
+      return state;
+    case types.GET_LIKES_DISLIKES_SUCCESS:
+      return { ...state, likes: action.likes, dislikes: action.dislikes };
+    case types.GET_LIKES_DISLIKES_ERROR:
+      return { ...state, message: action.message };
+    case types.CREATE_COMMENT:
+      return state;
+    case types.CREATE_COMMENT_SUCCESS:
+      return { ...state, create_comment: true };
+    case types.CREATE_COMMENT_ERROR:
+      return { ...state, message: action.message };
+    case types.GET_COMMENTS:
+      return state;
+    case types.GET_COMMENTS_SUCCESS:
+      return {
+        ...state,
+        ...action,
+      };
+    case types.GET_COMMENTS_ERROR:
+      return { ...state, message: action.message };
+    case types.WATCHED_MOVIE:
+      return state;
+    case types.WATCHED_MOVIE_SUCCESS:
+      return {
+        ...state,
+        movies: state.movies.map((movie) =>
+          movie.id === action.movie_id ? { ...movie, watched: true } : movie
+        ),
+      };
+    case types.WATCHED_MOVIE_ERROR:
+      return { ...state, message: action.message };
     default:
       return state;
   }
