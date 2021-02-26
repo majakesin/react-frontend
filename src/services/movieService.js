@@ -7,6 +7,8 @@ const ENDPOINTS = {
   GET_LIKES_DISLIKES: "api/movies/like/",
   CREATE_COMMENT: "api/movies/comments/",
   WATCHED_MOVIE: "api/movies/watched/",
+  GET_POPULAR: "api/movies/popular/",
+  GET_RELATED: "api/movies/related/",
 };
 class MovieService extends ApiService {
   movies = (nextOrPrevious, title, genres) => {
@@ -23,7 +25,12 @@ class MovieService extends ApiService {
       return this.apiClient.get(nextOrPrevious);
     }
   };
-
+  relatedMovies = async (genres) => {
+    const { data } = await this.apiClient.get(ENDPOINTS.GET_RELATED, {
+      params: { genre: genres },
+    });
+    return data;
+  };
   likeDislike = (movie, flag) => {
     const data = { movie_id: movie.id, type: flag };
     return this.apiClient.post(ENDPOINTS.LIKE_DISLIKE, data);
@@ -51,9 +58,10 @@ class MovieService extends ApiService {
       params: { movie_id: movie_id },
     });
   };
-  oneMovie = (id) => {
+  oneMovie = async (id) => {
     const url = ENDPOINTS.GET_MOVIES + id + "/";
-    return this.apiClient.get(url);
+    const { data } = await this.apiClient.get(url);
+    return data;
   };
 
   getComments = (nextOrPrevious, movie_id) => {
@@ -66,6 +74,9 @@ class MovieService extends ApiService {
     }
   };
 
+  getPopularMovies = () => {
+    return this.apiClient.get(ENDPOINTS.GET_POPULAR);
+  };
   createComment = (comment, movie_id) => {
     comment = {
       title: comment.title,

@@ -5,6 +5,7 @@ import Pagination from "./pagination";
 import Movies from "./movies";
 import MovieModal from "./movieModal";
 import Search from "./search";
+import SideBar from "./sidebar";
 const LogedHome = () => {
   const dispatch = useDispatch();
   const movies = useSelector((state) => state.movies.movies);
@@ -17,14 +18,17 @@ const LogedHome = () => {
 
   return (
     <div className="container">
-      <div className="row">
+      <SideBar></SideBar>
+      <div className="row" style={{ marginLeft: "240px" }}>
         <MovieModal></MovieModal>
         <Search></Search>
       </div>
-      <div className="row">
+      <div className="row" style={{ marginLeft: "240px" }}>
         <Movies movies={movies}></Movies>
       </div>
-      <Pagination next={next} previous={previous}></Pagination>
+      <div style={{ marginLeft: "240px" }}>
+        <Pagination next={next} previous={previous}></Pagination>
+      </div>
     </div>
   );
 };

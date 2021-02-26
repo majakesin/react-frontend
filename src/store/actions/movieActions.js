@@ -197,3 +197,43 @@ export const watchedMovieError = (message) => {
     message,
   };
 };
+
+export const getPopularMovies = () => {
+  return {
+    type: types.GET_POPULAR_MOVIES,
+  };
+};
+
+export const getPopularMoviesSuccess = (movies) => {
+  return {
+    type: types.GET_POPULAR_MOVIES_SUCCESS,
+    movies,
+  };
+};
+export const getPopularMoviesError = (message) => {
+  return {
+    type: types.GET_POPULAR_MOVIES_ERROR,
+    message,
+  };
+};
+
+export const getRelatedMovies = (genres) => {
+  return {
+    type: types.GET_RELATED_MOVIES,
+    genres,
+  };
+};
+
+export const getRelatedMoviesSuccess = (movies) => {
+  return {
+    type: types.GET_RELATED_MOVIES_SUCCESS,
+    movies,
+  };
+};
+
+export const getRelatedMoviesError = (message) => {
+  return {
+    type: types.GET_RELATED_MOVIES_ERROR,
+    message,
+  };
+};

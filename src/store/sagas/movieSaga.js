@@ -14,6 +14,10 @@ import {
   getMoviesSuccess,
   getOneMovieError,
   getOneMovieSuccess,
+  getPopularMoviesError,
+  getPopularMoviesSuccess,
+  getRelatedMoviesError,
+  getRelatedMoviesSuccess,
   incremenetMovieViewError,
   incrementMovieViewSuccess,
   MovieLikeDislikeError,
@@ -59,7 +63,7 @@ function* CreateMovie({ values, selectedGenres }) {
 
 function* GetOne({ id }) {
   try {
-    const { data } = yield call(movieService.oneMovie, id);
+    const data = yield call(movieService.oneMovie, id);
     yield put(getOneMovieSuccess(data));
   } catch (exception) {
     yield put(getOneMovieError(exception.message));
@@ -115,6 +119,24 @@ function* WatchedMovie({ movie_id }) {
   }
 }
 
+function* getPopularMovies() {
+  try {
+    const { data } = yield call(movieService.getPopularMovies);
+    yield put(getPopularMoviesSuccess(data));
+  } catch (exception) {
+    yield put(getPopularMoviesError(exception.message));
+  }
+}
+
+function* GetRelatedMovies({ genres }) {
+  try {
+    const data = yield call(movieService.relatedMovies, genres);
+    yield put(getRelatedMoviesSuccess(data));
+  } catch (exception) {
+    yield put(getRelatedMoviesError(exception.mesaage));
+  }
+}
+
 function* MovieSaga() {
   yield takeEvery(types.MOVIES_GET, Movies);
   yield takeEvery(types.GET_ONE_MOVIE, GetOne);
@@ -125,5 +147,7 @@ function* MovieSaga() {
   yield takeEvery(types.CREATE_COMMENT, createComment);
   yield takeEvery(types.GET_COMMENTS, getComments);
   yield takeEvery(types.WATCHED_MOVIE, WatchedMovie);
+  yield takeEvery(types.GET_POPULAR_MOVIES, getPopularMovies);
+  yield takeEvery(types.GET_RELATED_MOVIES, GetRelatedMovies);
 }
 export default MovieSaga;
