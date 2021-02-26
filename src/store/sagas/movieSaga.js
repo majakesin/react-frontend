@@ -18,6 +18,8 @@ import {
   incrementMovieViewSuccess,
   MovieLikeDislikeError,
   MovieLikeDislikeSuccess,
+  watchedMovieError,
+  watchedMovieSuccess,
 } from "../actions/movieActions";
 import movieService from "../../services/movieService";
 
@@ -104,6 +106,15 @@ function* getComments({ nextOrPrevious, movie_id }) {
   }
 }
 
+function* WatchedMovie({ movie_id }) {
+  try {
+    yield call(movieService.watchedMovies, movie_id);
+    yield put(watchedMovieSuccess(movie_id));
+  } catch (exception) {
+    yield put(watchedMovieError(exception.message));
+  }
+}
+
 function* MovieSaga() {
   yield takeEvery(types.MOVIES_GET, Movies);
   yield takeEvery(types.GET_ONE_MOVIE, GetOne);
@@ -113,5 +124,6 @@ function* MovieSaga() {
   yield takeEvery(types.GET_LIKES_DISLIKES, getLikesDislikeForMovie);
   yield takeEvery(types.CREATE_COMMENT, createComment);
   yield takeEvery(types.GET_COMMENTS, getComments);
+  yield takeEvery(types.WATCHED_MOVIE, WatchedMovie);
 }
 export default MovieSaga;

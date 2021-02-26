@@ -8,6 +8,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Home from "./components/Home";
 import LogedHome from "./components/logedHome";
 import OneMoviePage from "./components/oneMovie";
+import WatchedMovies from "./components/watchedMovies";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/login" exact component={Login} />
           <Route path="/loged/home" exact component={LogedHome} />
           <Route path="/one/movie" exact component={OneMoviePage} />
+          <Route path="/watched/movies" exact component={WatchedMovies} />
         </BrowserRouter>
       </div>
       <br></br>

@@ -21,9 +21,7 @@ function movieReducer(state = initialState, action) {
     case types.MOVIES_GET_SUCCESS:
       return {
         ...state,
-        movies: action.movies,
-        next: action.next,
-        previous: action.previous,
+        ...action,
       };
     case types.MOVIES_GET_ERROR:
       return { ...state, message: action.message };
@@ -68,11 +66,20 @@ function movieReducer(state = initialState, action) {
     case types.GET_COMMENTS_SUCCESS:
       return {
         ...state,
-        comments: action.comments,
-        next: action.next,
-        previous: action.previous,
+        ...action,
       };
     case types.GET_COMMENTS_ERROR:
+      return { ...state, message: action.message };
+    case types.WATCHED_MOVIE:
+      return state;
+    case types.WATCHED_MOVIE_SUCCESS:
+      return {
+        ...state,
+        movies: state.movies.map((movie) =>
+          movie.id === action.movie_id ? { ...movie, watched: true } : movie
+        ),
+      };
+    case types.WATCHED_MOVIE_ERROR:
       return { ...state, message: action.message };
     default:
       return state;

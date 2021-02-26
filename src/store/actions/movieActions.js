@@ -177,3 +177,23 @@ export const getCommentsError = (message) => {
     message,
   };
 };
+
+export const watchedMovie = (movie_id) => {
+  return {
+    type: types.WATCHED_MOVIE,
+    movie_id,
+  };
+};
+
+export const watchedMovieSuccess = (movie_id) => {
+  return {
+    type: types.WATCHED_MOVIE_SUCCESS,
+    movie_id,
+  };
+};
+export const watchedMovieError = (message) => {
+  return {
+    type: types.WATCHED_MOVIE_ERROR,
+    message,
+  };
+};

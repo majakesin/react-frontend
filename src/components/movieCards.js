@@ -2,7 +2,7 @@ import React from "react";
 import "./css/movieCard.css";
 import "font-awesome/css/font-awesome.min.css";
 import { useDispatch } from "react-redux";
-import { movieLikeDislike } from "../store/actions/movieActions";
+import { movieLikeDislike, watchedMovie } from "../store/actions/movieActions";
 
 const MovieCard = ({ movie }) => {
   const dispatch = useDispatch();
@@ -42,6 +42,26 @@ const MovieCard = ({ movie }) => {
             <a href={`/one/movie?id=${movie.id}`} style={{ marginLeft: "20%" }}>
               About
             </a>
+            {!movie.watched ? (
+              <button
+                onClick={() => {
+                  dispatch(watchedMovie(movie.id));
+                }}
+                className="btn btn-outline-info"
+              >
+                Watched
+              </button>
+            ) : (
+              <div
+                style={{
+                  backgroundColor: "red",
+                  color: "white",
+                  align: "center",
+                }}
+              >
+                <p> Watched </p>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -48,3 +48,8 @@ export const CREATE_COMMENT_ERROR = "create_comment_error";
 export const GET_COMMENTS = "get_comments";
 export const GET_COMMENTS_SUCCESS = "get_comments_success";
 export const GET_COMMENTS_ERROR = "get_comments_error";
+
+// za kreiranje filma koji je gledan
+export const WATCHED_MOVIE = "watched_movie";
+export const WATCHED_MOVIE_SUCCESS = "watched_movie_success";
+export const WATCHED_MOVIE_ERROR = "watched_movie_error";

@@ -6,6 +6,7 @@ const ENDPOINTS = {
   LIKE_DISLIKE: "api/movies/like/",
   GET_LIKES_DISLIKES: "api/movies/like/",
   CREATE_COMMENT: "api/movies/comments/",
+  WATCHED_MOVIE: "api/movies/watched/",
 };
 class MovieService extends ApiService {
   movies = (nextOrPrevious, title, genres) => {
@@ -72,6 +73,10 @@ class MovieService extends ApiService {
       movie: movie_id,
     };
     return this.apiClient.post(ENDPOINTS.CREATE_COMMENT, comment);
+  };
+  watchedMovies = (movie_id) => {
+    const movie = { movie_id: movie_id };
+    return this.apiClient.post(ENDPOINTS.WATCHED_MOVIE, movie);
   };
 }
 const movieService = new MovieService();
