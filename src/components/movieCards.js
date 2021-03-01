@@ -11,14 +11,6 @@ const MovieCard = ({ movie }) => {
     dispatch(movieLikeDislike(movie, flag));
   };
 
-  const queryParam = (movie) => {
-    let query = "/one/movie?id=" + movie.id;
-    movie.genres.forEach((genre) => {
-      let temp = "&genres=" + genre;
-      query += temp;
-    });
-    return query;
-  };
   return (
     <div className="card col-sm-3" style={{ margin: "3%" }}>
       <div className="panel panel-primary">
@@ -48,7 +40,7 @@ const MovieCard = ({ movie }) => {
               <i style={{ marginLeft: "3%" }} class="fa fa fa-thumbs-down"></i>
             </div>
 
-            <a href={queryParam(movie)} style={{ marginLeft: "20%" }}>
+            <a href={`/one/movie?id=${movie.id}`} style={{ marginLeft: "20%" }}>
               About
             </a>
             {!movie.watched ? (

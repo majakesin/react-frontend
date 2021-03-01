@@ -25,12 +25,20 @@ const OneMoviePage = () => {
     const search = window.location.search;
     const params = new URLSearchParams(search);
     const id = params.get("id");
-    const genres = params.get("genres");
     dispatch(getOneMovie(id));
     dispatch(getLikesDislikes(id));
     dispatch(getComments(undefined, id));
-    dispatch(getRelatedMovies(genres));
   }, []);
+
+  useEffect(() => {
+    if (movie !== undefined && movie !== null) {
+      if (movie.genres === null) {
+        dispatch(getRelatedMovies(undefined));
+      }
+      dispatch(getRelatedMovies(movie.genres));
+    }
+  }, [movie]);
+
   if (!movie) {
     return <div></div>;
   }
