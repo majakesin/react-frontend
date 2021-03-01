@@ -1,5 +1,5 @@
 import ApiService from "./common/ApiService";
-
+import qs from "qs";
 const ENDPOINTS = {
   GET_MOVIES: "api/movies/movies/",
   GET_GENRES: "api/movies/genres/",
@@ -26,8 +26,12 @@ class MovieService extends ApiService {
     }
   };
   relatedMovies = async (genres) => {
+    var params = new URLSearchParams();
+    genres.forEach((item) => {
+      params.append("genre", item);
+    });
     const { data } = await this.apiClient.get(ENDPOINTS.GET_RELATED, {
-      params: { genre: genres },
+      params: params,
     });
     return data;
   };

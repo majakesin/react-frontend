@@ -31,11 +31,8 @@ const OneMoviePage = () => {
   }, []);
 
   useEffect(() => {
-    if (movie !== undefined && movie !== null) {
-      if (movie.genres === null) {
-        dispatch(getRelatedMovies(undefined));
-      }
-      dispatch(getRelatedMovies(movie.genres));
+    if (movie) {
+      dispatch(getRelatedMovies(movie.genres ? movie.genres : undefined));
     }
   }, [movie]);
 
