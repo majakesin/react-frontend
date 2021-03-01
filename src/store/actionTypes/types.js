@@ -53,3 +53,13 @@ export const GET_COMMENTS_ERROR = "get_comments_error";
 export const WATCHED_MOVIE = "watched_movie";
 export const WATCHED_MOVIE_SUCCESS = "watched_movie_success";
 export const WATCHED_MOVIE_ERROR = "watched_movie_error";
+
+//za preuzimanje popularnih filmova
+export const GET_POPULAR_MOVIES = "get_popular_movies";
+export const GET_POPULAR_MOVIES_SUCCESS = "get_popular_movies_success";
+export const GET_POPULAR_MOVIES_ERROR = "get_popular_movies_error";
+
+//za preuzimanje filmova preporucenih
+export const GET_RELATED_MOVIES = "get_related_movies";
+export const GET_RELATED_MOVIES_SUCCESS = "get_related_movies_success";
+export const GET_RELATED_MOVIES_ERROR = "get_related_movies_error";

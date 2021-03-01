@@ -13,6 +13,8 @@ let initialState = {
   dislikes: null,
   comment_create: false,
   comments: [],
+  popularMovies: [],
+  relatedMovies: [],
 };
 function movieReducer(state = initialState, action) {
   switch (action.type) {
@@ -26,7 +28,7 @@ function movieReducer(state = initialState, action) {
     case types.MOVIES_GET_ERROR:
       return { ...state, message: action.message };
     case types.GET_ONE_MOVIE:
-      return { ...state };
+      return { ...state, movie: action.movie };
     case types.GET_ONE_MOVIE_SUCCESS:
       return { ...state, movie: action.movie };
     case types.GET_ONE_MOVIE_ERROR:
@@ -80,6 +82,24 @@ function movieReducer(state = initialState, action) {
         ),
       };
     case types.WATCHED_MOVIE_ERROR:
+      return { ...state, message: action.message };
+    case types.GET_POPULAR_MOVIES:
+      return state;
+    case types.GET_POPULAR_MOVIES_SUCCESS: {
+      let popularMovies = action.movies;
+      popularMovies.sort((item1, item2) =>
+        item1.likes < item2.likes ? 1 : -1
+      );
+      return { ...state, popularMovies: popularMovies.slice(0, 5) };
+    }
+    case types.GET_POPULAR_MOVIES_ERROR:
+      return { ...state, message: action.message };
+    case types.GET_RELATED_MOVIES:
+      return state;
+    case types.GET_RELATED_MOVIES_SUCCESS: {
+      return { ...state, relatedMovies: action.movies.slice(0, 10) };
+    }
+    case types.GET_RELATED_MOVIES_ERROR:
       return { ...state, message: action.message };
     default:
       return state;

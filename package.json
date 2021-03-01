@@ -13,6 +13,7 @@
     "debounce": "^1.2.0",
     "font-awesome": "^4.7.0",
     "formik": "^2.2.6",
+    "qs": "^6.9.6",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
     "react-dom": "^17.0.1",

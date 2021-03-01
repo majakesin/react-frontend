@@ -39,6 +39,7 @@ const MovieCard = ({ movie }) => {
               ></i>
               <i style={{ marginLeft: "3%" }} class="fa fa fa-thumbs-down"></i>
             </div>
+
             <a href={`/one/movie?id=${movie.id}`} style={{ marginLeft: "20%" }}>
               About
             </a>
