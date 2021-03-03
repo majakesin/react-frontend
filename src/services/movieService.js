@@ -9,6 +9,7 @@ const ENDPOINTS = {
   WATCHED_MOVIE: "api/movies/watched/",
   GET_POPULAR: "api/movies/popular/",
   GET_RELATED: "api/movies/related/",
+  GET_OMDB_MOVIE: "http://www.omdbapi.com/?apikey=1b01be0d&",
 };
 class MovieService extends ApiService {
   movies = (nextOrPrevious, title, genres) => {
@@ -92,6 +93,10 @@ class MovieService extends ApiService {
   watchedMovies = (movie_id) => {
     const movie = { movie_id: movie_id };
     return this.apiClient.post(ENDPOINTS.WATCHED_MOVIE, movie);
+  };
+  getOMDBMovie = (title) => {
+    const url = ENDPOINTS.GET_OMDB_MOVIE + "t=" + title;
+    return this.apiClient.get(url);
   };
 }
 const movieService = new MovieService();

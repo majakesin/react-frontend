@@ -63,3 +63,9 @@ export const GET_POPULAR_MOVIES_ERROR = "get_popular_movies_error";
 export const GET_RELATED_MOVIES = "get_related_movies";
 export const GET_RELATED_MOVIES_SUCCESS = "get_related_movies_success";
 export const GET_RELATED_MOVIES_ERROR = "get_related_movies_error";
+
+//za preuzimanje vrijednosti preko omdb
+export const GET_OMDB_MOVIE = "get_omddb_movie";
+export const GET_OMDB_MOVIE_SUCCESS = "get_omdb_movie_success";
+export const GET_OMDB_MOVIE_ERROR = "get_omdb_movie_error";
+export const REMOVE_OMDB_MOVIE = "remove_omdb_movie";

@@ -18,13 +18,24 @@ const MovieCard = ({ movie }) => {
           <h3>{movie.title}</h3>
         </div>
         <div className="panel-body">
-          <p style={{ margin: "3%" }}>{movie.description}</p>
-          <img
-            src={movie.cover_image}
-            className="img-responsive"
-            style={{ width: "95%", margin: "3%", height: "240px" }}
-            alt="movie"
-          ></img>
+          <p style={{ margin: "3%" }}>
+            {movie.description.substring(0, 100)} ....
+          </p>
+          {!movie.image_url_omdb ? (
+            <img
+              src={movie.cover_image}
+              className="img-responsive"
+              style={{ width: "95%", margin: "3%", height: "240px" }}
+              alt="movie"
+            ></img>
+          ) : (
+            <img
+              src={movie.image_url_omdb}
+              className="img-responsive"
+              style={{ width: "95%", margin: "3%", height: "240px" }}
+              alt="movie"
+            ></img>
+          )}
 
           <div className="panel-footer like" style={{ marginBottom: "3%" }}>
             <div

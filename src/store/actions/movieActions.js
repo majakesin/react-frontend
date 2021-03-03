@@ -237,3 +237,30 @@ export const getRelatedMoviesError = (message) => {
     message,
   };
 };
+
+export const getOMDBMovie = (title) => {
+  return {
+    type: types.GET_OMDB_MOVIE,
+    title,
+  };
+};
+
+export const getOMDBMovieSuccess = (movie) => {
+  return {
+    type: types.GET_OMDB_MOVIE_SUCCESS,
+    movie,
+  };
+};
+
+export const getOMDBMovieError = (message) => {
+  return {
+    type: types.GET_OMDB_MOVIE_ERROR,
+    message,
+  };
+};
+
+export const removeOmdbMovie = () => {
+  return {
+    type: types.REMOVE_OMDB_MOVIE,
+  };
+};

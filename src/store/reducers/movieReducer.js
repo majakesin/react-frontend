@@ -15,6 +15,7 @@ let initialState = {
   comments: [],
   popularMovies: [],
   relatedMovies: [],
+  OMDBMovie: null,
 };
 function movieReducer(state = initialState, action) {
   switch (action.type) {
@@ -101,6 +102,14 @@ function movieReducer(state = initialState, action) {
     }
     case types.GET_RELATED_MOVIES_ERROR:
       return { ...state, message: action.message };
+    case types.GET_OMDB_MOVIE:
+      return state;
+    case types.GET_OMDB_MOVIE_SUCCESS:
+      return { ...state, OMDBMovie: action.movie };
+    case types.GET_OMDB_MOVIE_ERROR:
+      return { ...state, message: action.message };
+    case types.REMOVE_OMDB_MOVIE:
+      return { ...state, OMDBMovie: null };
     default:
       return state;
   }

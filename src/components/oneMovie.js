@@ -50,12 +50,21 @@ const OneMoviePage = () => {
           <div className="panel-body">
             <p style={{ margin: "3%" }}>{movie.description}</p>
             <div style={{ height: "10%" }}>
-              <img
-                src={"http://127.0.0.1:8000" + movie.cover_image}
-                className="img-responsive"
-                style={{ width: "95%", margin: "3%" }}
-                alt="movie"
-              ></img>
+              {!movie.image_url_omdb ? (
+                <img
+                  src={"http://127.0.0.1:8000" + movie.cover_image}
+                  className="img-responsive"
+                  style={{ width: "95%", margin: "3%", height: "240px" }}
+                  alt="movie"
+                ></img>
+              ) : (
+                <img
+                  src={movie.image_url_omdb}
+                  className="img-responsive"
+                  style={{ width: "95%", margin: "3%", height: "240px" }}
+                  alt="movie"
+                ></img>
+              )}
             </div>
             <div className="panel-footer like" style={{ marginBottom: "3%" }}>
               <div

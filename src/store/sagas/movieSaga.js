@@ -1,5 +1,5 @@
 import * as types from "../actionTypes/types";
-import { call, put, take, takeEvery } from "redux-saga/effects";
+import { call, put, take, takeEvery, takeLatest } from "redux-saga/effects";
 import {
   createCommentError,
   createCommentSucces,
@@ -12,6 +12,8 @@ import {
   getLikesDislikesSuccess,
   getMoviesError,
   getMoviesSuccess,
+  getOMDBMovieError,
+  getOMDBMovieSuccess,
   getOneMovieError,
   getOneMovieSuccess,
   getPopularMoviesError,
@@ -22,6 +24,7 @@ import {
   incrementMovieViewSuccess,
   MovieLikeDislikeError,
   MovieLikeDislikeSuccess,
+  removeOmdbMovie,
   watchedMovieError,
   watchedMovieSuccess,
 } from "../actions/movieActions";
@@ -133,10 +136,22 @@ function* GetRelatedMovies({ genres }) {
     const data = yield call(movieService.relatedMovies, genres);
     yield put(getRelatedMoviesSuccess(data));
   } catch (exception) {
-    yield put(getRelatedMoviesError(exception.mesaage));
+    yield put(getRelatedMoviesError(exception.message));
   }
 }
-
+function* getOMDBMovie({ title }) {
+  try {
+    const { data } = yield call(movieService.getOMDBMovie, title);
+    yield put(getOMDBMovieSuccess(data));
+  } catch (exception) {
+    yield put(getOMDBMovieError(exception.message));
+  }
+}
+function* RemoveOmdbMovie() {
+  try {
+    yield put(removeOmdbMovie);
+  } catch (exception) {}
+}
 function* MovieSaga() {
   yield takeEvery(types.MOVIES_GET, Movies);
   yield takeEvery(types.GET_ONE_MOVIE, GetOne);
@@ -149,5 +164,7 @@ function* MovieSaga() {
   yield takeEvery(types.WATCHED_MOVIE, WatchedMovie);
   yield takeEvery(types.GET_POPULAR_MOVIES, getPopularMovies);
   yield takeEvery(types.GET_RELATED_MOVIES, GetRelatedMovies);
+  yield takeEvery(types.GET_OMDB_MOVIE, getOMDBMovie);
+  yield takeLatest(types.REMOVE_OMDB_MOVIE, RemoveOmdbMovie);
 }
 export default MovieSaga;
