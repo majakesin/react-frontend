@@ -1,5 +1,6 @@
 import ApiService from "./common/ApiService";
 import qs from "qs";
+import { omdb_url } from "../constants/constants";
 const ENDPOINTS = {
   GET_MOVIES: "api/movies/movies/",
   GET_GENRES: "api/movies/genres/",
@@ -9,7 +10,6 @@ const ENDPOINTS = {
   WATCHED_MOVIE: "api/movies/watched/",
   GET_POPULAR: "api/movies/popular/",
   GET_RELATED: "api/movies/related/",
-  GET_OMDB_MOVIE: "http://www.omdbapi.com/?apikey=1b01be0d&",
 };
 class MovieService extends ApiService {
   movies = (nextOrPrevious, title, genres) => {
@@ -95,7 +95,7 @@ class MovieService extends ApiService {
     return this.apiClient.post(ENDPOINTS.WATCHED_MOVIE, movie);
   };
   getOMDBMovie = (title) => {
-    const url = ENDPOINTS.GET_OMDB_MOVIE + "t=" + title;
+    const url = omdb_url + "t=" + title;
     return this.apiClient.get(url);
   };
 }

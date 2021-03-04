@@ -10,6 +10,8 @@ import {
 import CommentModal from "./commentModal";
 import Movies from "./movies";
 import PaginationComments from "./paginationComments";
+import MovieImage from "./movieImage";
+import { django_url } from "../constants/constants";
 
 const OneMoviePage = () => {
   const dispatch = useDispatch();
@@ -51,19 +53,9 @@ const OneMoviePage = () => {
             <p style={{ margin: "3%" }}>{movie.description}</p>
             <div style={{ height: "10%" }}>
               {!movie.image_url_omdb ? (
-                <img
-                  src={"http://127.0.0.1:8000" + movie.cover_image}
-                  className="img-responsive"
-                  style={{ width: "95%", margin: "3%", height: "240px" }}
-                  alt="movie"
-                ></img>
+                <MovieImage src={django_url + movie.cover_image}></MovieImage>
               ) : (
-                <img
-                  src={movie.image_url_omdb}
-                  className="img-responsive"
-                  style={{ width: "95%", margin: "3%", height: "240px" }}
-                  alt="movie"
-                ></img>
+                <MovieImage src={movie.image_url_omdb}></MovieImage>
               )}
             </div>
             <div className="panel-footer like" style={{ marginBottom: "3%" }}>

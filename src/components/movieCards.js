@@ -3,6 +3,7 @@ import "./css/movieCard.css";
 import "font-awesome/css/font-awesome.min.css";
 import { useDispatch } from "react-redux";
 import { movieLikeDislike, watchedMovie } from "../store/actions/movieActions";
+import MovieImage from "./movieImage";
 
 const MovieCard = ({ movie }) => {
   const dispatch = useDispatch();
@@ -22,19 +23,9 @@ const MovieCard = ({ movie }) => {
             {movie.description.substring(0, 100)} ....
           </p>
           {!movie.image_url_omdb ? (
-            <img
-              src={movie.cover_image}
-              className="img-responsive"
-              style={{ width: "95%", margin: "3%", height: "240px" }}
-              alt="movie"
-            ></img>
+            <MovieImage src={movie.cover_image}></MovieImage>
           ) : (
-            <img
-              src={movie.image_url_omdb}
-              className="img-responsive"
-              style={{ width: "95%", margin: "3%", height: "240px" }}
-              alt="movie"
-            ></img>
+            <MovieImage src={movie.image_url_omdb}></MovieImage>
           )}
 
           <div className="panel-footer like" style={{ marginBottom: "3%" }}>
