@@ -27,7 +27,6 @@ const EVENTS = [
 
 export const socketOnMessage = () => {
   socket.onmessage = function (event) {
-    console.log(event);
     const data = JSON.parse(event.data);
     try {
       const handler = EVENTS.find((ev) => ev.isAppicable(data.type));
