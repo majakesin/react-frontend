@@ -6,12 +6,14 @@ import {
   getLikesDislikes,
   getOneMovie,
   getRelatedMovies,
+  addCreatedCommentToComments,
 } from "../store/actions/movieActions";
 import CommentModal from "./commentModal";
 import Movies from "./movies";
 import PaginationComments from "./paginationComments";
 import MovieImage from "./movieImage";
 import { django_url } from "../constants/constants";
+
 import { socket } from "./socket";
 
 const OneMoviePage = () => {
@@ -28,9 +30,12 @@ const OneMoviePage = () => {
   const relatedMovies = useSelector((state) => state.movies.relatedMovies);
 
   socket.onmessage = function (event) {
-    console.log(event.data);
-    dispatch(getComments(undefined, id));
-    dispatch(getLikesDislikes(id));
+    const data = JSON.parse(event.data);
+    if (data.like) {
+      dispatch(getLikesDislikes(id));
+    } else {
+      dispatch(addCreatedCommentToComments(data));
+    }
   };
 
   useEffect(() => {
@@ -59,11 +64,10 @@ const OneMoviePage = () => {
           <div className="panel-body">
             <p style={{ margin: "3%" }}>{movie.description}</p>
             <div style={{ height: "10%" }}>
-              {!movie.image_url_omdb ? (
-                <MovieImage src={django_url + movie.cover_image}></MovieImage>
-              ) : (
-                <MovieImage src={movie.image_url_omdb}></MovieImage>
-              )}
+              <MovieImage
+                src={django_url + movie.cover_image}
+                image_url_omdb={movie.image_url_omdb}
+              ></MovieImage>
             </div>
             <div className="panel-footer like" style={{ marginBottom: "3%" }}>
               <div

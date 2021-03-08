@@ -23,12 +23,10 @@ const MovieCard = ({ movie }) => {
           <p style={{ margin: "3%" }}>
             {movie.description.substring(0, 100)} ....
           </p>
-          {!movie.image_url_omdb ? (
-            <MovieImage src={movie.cover_image}></MovieImage>
-          ) : (
-            <MovieImage src={movie.image_url_omdb}></MovieImage>
-          )}
-
+          <MovieImage
+            src={movie.cover_image}
+            image_url_omdb={movie.image_url_omdb}
+          ></MovieImage>
           <div className="panel-footer like" style={{ marginBottom: "3%" }}>
             <div
               className="row"
@@ -38,14 +36,14 @@ const MovieCard = ({ movie }) => {
                 class="fa fa fa-thumbs-up"
                 onClick={() => {
                   likeDislike(movie, true);
-                  socket.send(JSON.stringify("Someone has liked a comment."));
+                  socket.send(JSON.stringify({ like: "like" }));
                 }}
               ></i>
               <i
                 style={{ marginLeft: "3%" }}
-                onClikc={() => {
+                onClick={() => {
                   likeDislike(movie, false);
-                  socket.send(JSON.stringify("Someone has diliked a comment."));
+                  socket.send(JSON.stringify({ like: "dislike" }));
                 }}
                 class="fa fa fa-thumbs-down"
               ></i>

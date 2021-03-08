@@ -1,14 +1,23 @@
 import React from "react";
 
-const MovieImage = ({ src }) => {
+const MovieImage = ({ src, image_url_omdb }) => {
   return (
     <div>
-      <img
-        src={src}
-        className="img-responsive"
-        style={{ width: "95%", margin: "3%", height: "240px" }}
-        alt="movie"
-      ></img>
+      {!image_url_omdb ? (
+        <img
+          src={src}
+          className="img-responsive"
+          style={{ width: "95%", margin: "3%", height: "240px" }}
+          alt="movie"
+        ></img>
+      ) : (
+        <img
+          src={image_url_omdb}
+          className="img-responsive"
+          style={{ width: "95%", margin: "3%", height: "240px" }}
+          alt="movie"
+        ></img>
+      )}
     </div>
   );
 };

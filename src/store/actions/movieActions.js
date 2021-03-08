@@ -264,3 +264,10 @@ export const removeOmdbMovie = () => {
     type: types.REMOVE_OMDB_MOVIE,
   };
 };
+// za websocket kada kreira komentar da ga samo doda u state.movies.comments :)
+export const addCreatedCommentToComments = (comment) => {
+  return {
+    type: types.ADD_CREATED_COMMENT,
+    comment,
+  };
+};

@@ -61,7 +61,7 @@ function movieReducer(state = initialState, action) {
     case types.CREATE_COMMENT:
       return state;
     case types.CREATE_COMMENT_SUCCESS:
-      return { ...state, create_comment: true };
+      return { ...state, comment_create: true };
     case types.CREATE_COMMENT_ERROR:
       return { ...state, message: action.message };
     case types.GET_COMMENTS:
@@ -110,6 +110,8 @@ function movieReducer(state = initialState, action) {
       return { ...state, message: action.message };
     case types.REMOVE_OMDB_MOVIE:
       return { ...state, OMDBMovie: null };
+    case types.ADD_CREATED_COMMENT:
+      return { ...state, comments: [...state.comments, action.comment] };
     default:
       return state;
   }

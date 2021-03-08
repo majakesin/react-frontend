@@ -58,8 +58,7 @@ const CommentModal = ({ movie_id, socket }) => {
             validationSchema={CommentShema}
             onSubmit={(values) => {
               dispatch(createComment(values, movie_id));
-
-              socket.send(JSON.stringify("New comment has been created"));
+              socket.send(JSON.stringify(values));
               closeModal();
             }}
           >

@@ -69,3 +69,6 @@ export const GET_OMDB_MOVIE = "get_omddb_movie";
 export const GET_OMDB_MOVIE_SUCCESS = "get_omdb_movie_success";
 export const GET_OMDB_MOVIE_ERROR = "get_omdb_movie_error";
 export const REMOVE_OMDB_MOVIE = "remove_omdb_movie";
+
+// za websocket
+export const ADD_CREATED_COMMENT = "add_created_comment";
