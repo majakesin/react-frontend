@@ -20,7 +20,7 @@ const customStyles = {
   },
 };
 
-const CommentModal = ({ movie_id }) => {
+const CommentModal = ({ movie_id, socket }) => {
   const dispatch = useDispatch();
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
@@ -59,6 +59,7 @@ const CommentModal = ({ movie_id }) => {
             onSubmit={(values) => {
               dispatch(createComment(values, movie_id));
 
+              socket.send(JSON.stringify("New comment has been created"));
               closeModal();
             }}
           >

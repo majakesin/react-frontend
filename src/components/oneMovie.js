@@ -12,8 +12,12 @@ import Movies from "./movies";
 import PaginationComments from "./paginationComments";
 import MovieImage from "./movieImage";
 import { django_url } from "../constants/constants";
+import { socket } from "./socket";
 
 const OneMoviePage = () => {
+  const search = window.location.search;
+  const params = new URLSearchParams(search);
+  const id = params.get("id");
   const dispatch = useDispatch();
   const movie = useSelector((state) => state.movies.movie);
   const likes = useSelector((state) => state.movies.likes);
@@ -23,10 +27,13 @@ const OneMoviePage = () => {
   const previous = useSelector((state) => state.movies.previous);
   const relatedMovies = useSelector((state) => state.movies.relatedMovies);
 
+  socket.onmessage = function (event) {
+    console.log(event.data);
+    dispatch(getComments(undefined, id));
+    dispatch(getLikesDislikes(id));
+  };
+
   useEffect(() => {
-    const search = window.location.search;
-    const params = new URLSearchParams(search);
-    const id = params.get("id");
     dispatch(getOneMovie(id));
     dispatch(getLikesDislikes(id));
     dispatch(getComments(undefined, id));
@@ -70,6 +77,7 @@ const OneMoviePage = () => {
               </div>
               <div className="row" style={{ width: "100%" }}>
                 <CommentModal
+                  socket={socket}
                   movie_id={movie.id}
                   style={{ marginLeft: "65%" }}
                 ></CommentModal>

@@ -4,6 +4,7 @@ import "font-awesome/css/font-awesome.min.css";
 import { useDispatch } from "react-redux";
 import { movieLikeDislike, watchedMovie } from "../store/actions/movieActions";
 import MovieImage from "./movieImage";
+import { socket } from "./socket";
 
 const MovieCard = ({ movie }) => {
   const dispatch = useDispatch();
@@ -37,9 +38,17 @@ const MovieCard = ({ movie }) => {
                 class="fa fa fa-thumbs-up"
                 onClick={() => {
                   likeDislike(movie, true);
+                  socket.send(JSON.stringify("Someone has liked a comment."));
                 }}
               ></i>
-              <i style={{ marginLeft: "3%" }} class="fa fa fa-thumbs-down"></i>
+              <i
+                style={{ marginLeft: "3%" }}
+                onClikc={() => {
+                  likeDislike(movie, false);
+                  socket.send(JSON.stringify("Someone has diliked a comment."));
+                }}
+                class="fa fa fa-thumbs-down"
+              ></i>
             </div>
 
             <a href={`/one/movie?id=${movie.id}`} style={{ marginLeft: "20%" }}>

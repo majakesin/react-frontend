@@ -6,8 +6,6 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import "bootstrap/dist/css/bootstrap.css";
-import axios from "axios";
-
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>

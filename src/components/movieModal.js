@@ -57,19 +57,18 @@ const MovieModal = () => {
 
   const removeOmdbMovieFun = (event) => {
     event.preventDefault();
-    movieRef.current.values.description = " ";
-    movieRef.current.values.title = "";
-    movieRef.current.values.cover_image = "";
+    movieRef.current.resetForm();
     dispatch(removeOmdbMovie());
   };
 
   useEffect(() => {
     dispatch(getGenres());
   }, []);
+
   useEffect(() => {
     if (omdbMovie) {
-      movieRef.current.values.description = omdbMovie.Plot;
-      movieRef.current.values.cover_image = omdbMovie.Poster;
+      movieRef.current.setFieldValue("description", omdbMovie.Plot);
+      movieRef.current.setFieldValue("cover_image", omdbMovie.Poster);
     }
   }, [omdbMovie]);
   const [modalIsOpen, setIsOpen] = React.useState(false);
