@@ -6,6 +6,7 @@ import Movies from "./movies";
 import MovieModal from "./movieModal";
 import Search from "./search";
 import SideBar from "./sidebar";
+
 const LogedHome = () => {
   const dispatch = useDispatch();
   const movies = useSelector((state) => state.movies.movies);

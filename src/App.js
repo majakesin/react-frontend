@@ -9,6 +9,7 @@ import Home from "./components/Home";
 import LogedHome from "./components/logedHome";
 import OneMoviePage from "./components/oneMovie";
 import WatchedMovies from "./components/watchedMovies";
+import { socketOnMessage } from "./components/socket";
 
 function App() {
   return (

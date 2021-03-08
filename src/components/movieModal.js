@@ -7,8 +7,14 @@ import CustomInputComponent from "./formikComponent/customInputComponent";
 import CustomUploadFileComponent from "./formikComponent/customUploadFile";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { createMovie, getGenres } from "../store/actions/movieActions";
+import {
+  createMovie,
+  getGenres,
+  getOMDBMovie,
+  removeOmdbMovie,
+} from "../store/actions/movieActions";
 import { useState } from "react";
+import { useRef } from "react";
 
 Modal.setAppElement("#root");
 
@@ -29,6 +35,7 @@ const MovieModal = () => {
   //deo za preuzimanje zanrova
   const dispatch = useDispatch();
   const genres = useSelector((state) => state.movies.genres);
+  const omdbMovie = useSelector((state) => state.movies.OMDBMovie);
   const options = genres.map((item) => {
     let temp = { value: item.id, label: item.type };
     return temp;
@@ -40,9 +47,30 @@ const MovieModal = () => {
     console.log(selectedGenres);
   };
 
+  const movieRef = useRef();
+
+  const findOmdbMovie = (event) => {
+    event.preventDefault();
+
+    dispatch(getOMDBMovie(movieRef.current.values.title));
+  };
+
+  const removeOmdbMovieFun = (event) => {
+    event.preventDefault();
+    movieRef.current.resetForm();
+    dispatch(removeOmdbMovie());
+  };
+
   useEffect(() => {
     dispatch(getGenres());
   }, []);
+
+  useEffect(() => {
+    if (omdbMovie) {
+      movieRef.current.setFieldValue("description", omdbMovie.Plot);
+      movieRef.current.setFieldValue("cover_image", omdbMovie.Poster);
+    }
+  }, [omdbMovie]);
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   const openModal = () => {
@@ -55,6 +83,7 @@ const MovieModal = () => {
 
   const closeModal = () => {
     setIsOpen(false);
+    dispatch(removeOmdbMovie());
   };
   return (
     <div>
@@ -78,6 +107,8 @@ const MovieModal = () => {
               cover_image: undefined,
             }}
             validationSchema={MovieShema}
+            enableReinitialize={true}
+            innerRef={movieRef}
             onSubmit={(values) => {
               console.log(values);
               dispatch(createMovie(values, selectedGenres));
@@ -93,6 +124,17 @@ const MovieModal = () => {
                   placeholder="title"
                   className="form-control"
                 ></Field>
+                <button
+                  class="btn btn-danger"
+                  onClick={findOmdbMovie}
+                  style={{ marginRight: "5%" }}
+                >
+                  Find from omdb
+                </button>
+                <button onClick={removeOmdbMovieFun} class="btn btn-danger">
+                  Remove
+                </button>
+                <p></p>
                 <Field
                   name="description"
                   type="textarea"

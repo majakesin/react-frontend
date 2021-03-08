@@ -10,8 +10,13 @@ import {
 import CommentModal from "./commentModal";
 import Movies from "./movies";
 import PaginationComments from "./paginationComments";
+import MovieImage from "./movieImage";
+import { django_url } from "../constants/constants";
 
 const OneMoviePage = () => {
+  const search = window.location.search;
+  const params = new URLSearchParams(search);
+  const id = params.get("id");
   const dispatch = useDispatch();
   const movie = useSelector((state) => state.movies.movie);
   const likes = useSelector((state) => state.movies.likes);
@@ -22,9 +27,6 @@ const OneMoviePage = () => {
   const relatedMovies = useSelector((state) => state.movies.relatedMovies);
 
   useEffect(() => {
-    const search = window.location.search;
-    const params = new URLSearchParams(search);
-    const id = params.get("id");
     dispatch(getOneMovie(id));
     dispatch(getLikesDislikes(id));
     dispatch(getComments(undefined, id));
@@ -50,12 +52,10 @@ const OneMoviePage = () => {
           <div className="panel-body">
             <p style={{ margin: "3%" }}>{movie.description}</p>
             <div style={{ height: "10%" }}>
-              <img
-                src={"http://127.0.0.1:8000" + movie.cover_image}
-                className="img-responsive"
-                style={{ width: "95%", margin: "3%" }}
-                alt="movie"
-              ></img>
+              <MovieImage
+                src={django_url + movie.cover_image}
+                image_url_omdb={movie.image_url_omdb}
+              ></MovieImage>
             </div>
             <div className="panel-footer like" style={{ marginBottom: "3%" }}>
               <div

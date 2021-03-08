@@ -1,5 +1,6 @@
 import ApiService from "./common/ApiService";
 import qs from "qs";
+import { omdb_url } from "../constants/constants";
 const ENDPOINTS = {
   GET_MOVIES: "api/movies/movies/",
   GET_GENRES: "api/movies/genres/",
@@ -92,6 +93,10 @@ class MovieService extends ApiService {
   watchedMovies = (movie_id) => {
     const movie = { movie_id: movie_id };
     return this.apiClient.post(ENDPOINTS.WATCHED_MOVIE, movie);
+  };
+  getOMDBMovie = (title) => {
+    const url = omdb_url + "t=" + title;
+    return this.apiClient.get(url);
   };
 }
 const movieService = new MovieService();

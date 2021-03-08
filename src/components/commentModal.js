@@ -6,6 +6,7 @@ import { Formik, Field, Form } from "formik";
 import { useDispatch } from "react-redux";
 import CommentShema from "./formikComponent/commentShema";
 import { createComment } from "../store/actions/movieActions";
+import { socketSendData } from "./socket";
 
 const customStyles = {
   content: {
@@ -59,6 +60,12 @@ const CommentModal = ({ movie_id }) => {
             onSubmit={(values) => {
               dispatch(createComment(values, movie_id));
 
+              const sendData = {
+                type: "movie_comment",
+                title: values.title,
+                description: values.description,
+              };
+              socketSendData(sendData);
               closeModal();
             }}
           >

@@ -3,7 +3,8 @@ import "./css/movieCard.css";
 import "font-awesome/css/font-awesome.min.css";
 import { useDispatch } from "react-redux";
 import { movieLikeDislike, watchedMovie } from "../store/actions/movieActions";
-
+import MovieImage from "./movieImage";
+import { socketSendData } from "./socket";
 const MovieCard = ({ movie }) => {
   const dispatch = useDispatch();
 
@@ -18,14 +19,13 @@ const MovieCard = ({ movie }) => {
           <h3>{movie.title}</h3>
         </div>
         <div className="panel-body">
-          <p style={{ margin: "3%" }}>{movie.description}</p>
-          <img
+          <p style={{ margin: "3%" }}>
+            {movie.description.substring(0, 100)} ....
+          </p>
+          <MovieImage
             src={movie.cover_image}
-            className="img-responsive"
-            style={{ width: "95%", margin: "3%", height: "240px" }}
-            alt="movie"
-          ></img>
-
+            image_url_omdb={movie.image_url_omdb}
+          ></MovieImage>
           <div className="panel-footer like" style={{ marginBottom: "3%" }}>
             <div
               className="row"
@@ -35,9 +35,25 @@ const MovieCard = ({ movie }) => {
                 class="fa fa fa-thumbs-up"
                 onClick={() => {
                   likeDislike(movie, true);
+                  socketSendData({
+                    type: "movie_like",
+                    like: "like",
+                    id: movie.id,
+                  });
                 }}
               ></i>
-              <i style={{ marginLeft: "3%" }} class="fa fa fa-thumbs-down"></i>
+              <i
+                style={{ marginLeft: "3%" }}
+                onClick={() => {
+                  likeDislike(movie, false);
+                  socketSendData({
+                    type: "movie_like",
+                    like: "dislike",
+                    id: movie.id,
+                  });
+                }}
+                class="fa fa fa-thumbs-down"
+              ></i>
             </div>
 
             <a href={`/one/movie?id=${movie.id}`} style={{ marginLeft: "20%" }}>
