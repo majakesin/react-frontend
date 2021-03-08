@@ -35,7 +35,11 @@ const MovieCard = ({ movie }) => {
                 class="fa fa fa-thumbs-up"
                 onClick={() => {
                   likeDislike(movie, true);
-                  socketSendData({ type: "like", like: "like", id: movie.id });
+                  socketSendData({
+                    type: "movie_like",
+                    like: "like",
+                    id: movie.id,
+                  });
                 }}
               ></i>
               <i
@@ -43,7 +47,7 @@ const MovieCard = ({ movie }) => {
                 onClick={() => {
                   likeDislike(movie, false);
                   socketSendData({
-                    type: "like",
+                    type: "movie_like",
                     like: "dislike",
                     id: movie.id,
                   });

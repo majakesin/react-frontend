@@ -61,7 +61,7 @@ const CommentModal = ({ movie_id }) => {
               dispatch(createComment(values, movie_id));
 
               const sendData = {
-                type: "comment",
+                type: "movie_comment",
                 title: values.title,
                 description: values.description,
               };

@@ -30,7 +30,7 @@ export const socketOnMessage = () => {
     console.log(event);
     const data = JSON.parse(event.data);
     try {
-      const handler = EVENTS.find((ev) => ev.isAppicable("movie_" + data.type));
+      const handler = EVENTS.find((ev) => ev.isAppicable(data.type));
       handler.handle(data);
     } catch (exception) {
       console.log(exception.message);
