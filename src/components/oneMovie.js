@@ -6,15 +6,12 @@ import {
   getLikesDislikes,
   getOneMovie,
   getRelatedMovies,
-  addCreatedCommentToComments,
 } from "../store/actions/movieActions";
 import CommentModal from "./commentModal";
 import Movies from "./movies";
 import PaginationComments from "./paginationComments";
 import MovieImage from "./movieImage";
 import { django_url } from "../constants/constants";
-
-import { socket } from "./socket";
 
 const OneMoviePage = () => {
   const search = window.location.search;
@@ -28,15 +25,6 @@ const OneMoviePage = () => {
   const next = useSelector((state) => state.movies.next);
   const previous = useSelector((state) => state.movies.previous);
   const relatedMovies = useSelector((state) => state.movies.relatedMovies);
-
-  socket.onmessage = function (event) {
-    const data = JSON.parse(event.data);
-    if (data.like) {
-      dispatch(getLikesDislikes(id));
-    } else {
-      dispatch(addCreatedCommentToComments(data));
-    }
-  };
 
   useEffect(() => {
     dispatch(getOneMovie(id));
@@ -81,7 +69,6 @@ const OneMoviePage = () => {
               </div>
               <div className="row" style={{ width: "100%" }}>
                 <CommentModal
-                  socket={socket}
                   movie_id={movie.id}
                   style={{ marginLeft: "65%" }}
                 ></CommentModal>

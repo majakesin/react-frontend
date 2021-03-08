@@ -4,8 +4,7 @@ import "font-awesome/css/font-awesome.min.css";
 import { useDispatch } from "react-redux";
 import { movieLikeDislike, watchedMovie } from "../store/actions/movieActions";
 import MovieImage from "./movieImage";
-import { socket } from "./socket";
-
+import { socketSendData } from "./socket";
 const MovieCard = ({ movie }) => {
   const dispatch = useDispatch();
 
@@ -36,14 +35,18 @@ const MovieCard = ({ movie }) => {
                 class="fa fa fa-thumbs-up"
                 onClick={() => {
                   likeDislike(movie, true);
-                  socket.send(JSON.stringify({ like: "like" }));
+                  socketSendData({ type: "like", like: "like", id: movie.id });
                 }}
               ></i>
               <i
                 style={{ marginLeft: "3%" }}
                 onClick={() => {
                   likeDislike(movie, false);
-                  socket.send(JSON.stringify({ like: "dislike" }));
+                  socketSendData({
+                    type: "like",
+                    like: "dislike",
+                    id: movie.id,
+                  });
                 }}
                 class="fa fa fa-thumbs-down"
               ></i>
