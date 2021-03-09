@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { movieLikeDislike, watchedMovie } from "../store/actions/movieActions";
 import MovieImage from "./movieImage";
 import { socketSendData } from "./socket";
+import { django_url } from "../constants/constants";
 const MovieCard = ({ movie }) => {
   const dispatch = useDispatch();
 
@@ -23,8 +24,8 @@ const MovieCard = ({ movie }) => {
             {movie.description.substring(0, 100)} ....
           </p>
           <MovieImage
-            src={movie.cover_image}
-            image_url_omdb={movie.image_url_omdb}
+            list_photo={movie.list_photo}
+            info_photo={movie.info_photo}
           ></MovieImage>
           <div className="panel-footer like" style={{ marginBottom: "3%" }}>
             <div

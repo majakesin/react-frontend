@@ -52,10 +52,7 @@ const OneMoviePage = () => {
           <div className="panel-body">
             <p style={{ margin: "3%" }}>{movie.description}</p>
             <div style={{ height: "10%" }}>
-              <MovieImage
-                src={django_url + movie.cover_image}
-                image_url_omdb={movie.image_url_omdb}
-              ></MovieImage>
+              <MovieImage info_photo={movie.info_photo}></MovieImage>
             </div>
             <div className="panel-footer like" style={{ marginBottom: "3%" }}>
               <div
