@@ -1,18 +1,19 @@
 import React from "react";
+import { django_url } from "../constants/constants";
 
-const MovieImage = ({ src, image_url_omdb }) => {
+const MovieImage = ({ list_photo, info_photo }) => {
   return (
     <div>
-      {!image_url_omdb ? (
+      {!list_photo ? (
         <img
-          src={src}
+          src={django_url + info_photo}
           className="img-responsive"
           style={{ width: "95%", margin: "3%", height: "240px" }}
           alt="movie"
         ></img>
       ) : (
         <img
-          src={image_url_omdb}
+          src={django_url + list_photo}
           className="img-responsive"
           style={{ width: "95%", margin: "3%", height: "240px" }}
           alt="movie"
